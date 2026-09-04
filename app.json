@@ -23,6 +23,7 @@
       "expo-web-browser",
       "expo-font",
       "@react-native-community/datetimepicker",
+      ["expo-notifications", { "color": "#1F7A53", "defaultChannel": "payments" }],
       "expo-splash-screen",
       "expo-status-bar"
     ],
