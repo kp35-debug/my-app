@@ -1,61 +1,24 @@
-import {
+﻿import {
   ArrowUpRight, Bell, Building2, CalendarDays, Check, CheckCircle2,
   ChevronRight, CircleAlert, Clock3, FileText, Home as HomeIcon, LogOut, Menu, Plus,
   Receipt, Search, ShieldCheck, UserRound, Users, WalletCards, Wrench, X, Zap,
 } from 'lucide-react-native';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Alert, KeyboardAvoidingView, Modal, Platform, Pressable, ScrollView,
   StyleSheet, Text, TextInput, View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { storageService, type Property, type Tenant, type Unit, type Payment, type MaintenanceItem } from '../src/storage/storageService';
 
 type Tab = 'home' | 'properties' | 'tenants' | 'payments' | 'maintenance';
-type PaymentStatus = 'Paid' | 'Pending' | 'Overdue';
-type UnitStatus = 'Occupied' | 'Vacant' | 'Maintenance';
-type Payment = { id: string; tenant: string; unit: string; type: string; amount: number; date: string; status: PaymentStatus };
-type MaintenanceItem = { id: string; title: string; unit: string; date: string; status: 'Completed' | 'In progress' | 'Open'; cost: number };
-
+type PaymentStatus = Payment['status'];
+type UnitStatus = Unit['status'];
 const C = {
   ink: '#17221C', muted: '#718078', line: '#E5EAE6', background: '#F6F8F5', card: '#FFFFFF',
   green: '#1F7A53', greenDark: '#145339', mint: '#E6F2EA', amber: '#B46A13', amberSoft: '#FFF4E3',
   red: '#B54A48', redSoft: '#FCEBE9', navy: '#233B4D',
 };
-const properties = [
-  { id: 'p1', name: 'Cedar Heights', address: '12 Lakeview Road', units: 12, occupied: 10, income: 186000 },
-  { id: 'p2', name: 'Maple Residency', address: '44 Park Street', units: 8, occupied: 6, income: 104000 },
-  { id: 'p3', name: 'The Corner Shops', address: '8 Market Lane', units: 4, occupied: 3, income: 72000 },
-];
-const tenants = [
-  { id: 't1', name: 'Aarav Mehta', initials: 'AM', unit: 'A-204', property: 'Cedar Heights', rent: 24000, due: '05 Sep', tenure: 'Aug 2025 – Jul 2026', phone: '+91 98765 43210', color: '#E6F2EA' },
-  { id: 't2', name: 'Neha Kapoor', initials: 'NK', unit: 'B-102', property: 'Cedar Heights', rent: 22000, due: '05 Sep', tenure: 'Jan 2026 – Dec 2026', phone: '+91 98220 11890', color: '#FFF0E2' },
-  { id: 't3', name: 'Rohan Shah', initials: 'RS', unit: '1st Floor', property: 'Maple Residency', rent: 18000, due: '01 Sep', tenure: 'Apr 2025 – Mar 2026', phone: '+91 99112 20304', color: '#E8EFF8' },
-  { id: 't4', name: 'Priya Nair', initials: 'PN', unit: 'Shop 02', property: 'The Corner Shops', rent: 26000, due: '10 Sep', tenure: 'Jun 2024 – May 2027', phone: '+91 99870 44555', color: '#F3E8F3' },
-];
-const units = [
-  { id: 'u1', label: 'A-204', type: '2 BHK', tenant: 'Aarav Mehta', property: 'Cedar Heights', status: 'Occupied' as UnitStatus },
-  { id: 'u2', label: 'B-102', type: '1 BHK', tenant: 'Neha Kapoor', property: 'Cedar Heights', status: 'Occupied' as UnitStatus },
-  { id: 'u3', label: 'C-301', type: '2 BHK', tenant: '', property: 'Cedar Heights', status: 'Vacant' as UnitStatus },
-  { id: 'u4', label: '1st Floor', type: 'Office', tenant: 'Rohan Shah', property: 'Maple Residency', status: 'Occupied' as UnitStatus },
-  { id: 'u5', label: 'Shop 02', type: 'Retail', tenant: 'Priya Nair', property: 'The Corner Shops', status: 'Occupied' as UnitStatus },
-];
-const recurringBills = [
-  { label: 'Monthly rent', count: '4 tenants', amount: 90000, icon: HomeIcon, color: C.green },
-  { label: 'Electricity', count: '3 meters', amount: 8400, icon: Zap, color: '#C1771A' },
-  { label: 'Maintenance', count: '2 units', amount: 5000, icon: Wrench, color: C.navy },
-];
-const initialPayments: Payment[] = [
-  { id: 'pay1', tenant: 'Aarav Mehta', unit: 'A-204', type: 'Monthly rent', amount: 24000, date: '02 Sep 2026', status: 'Paid' },
-  { id: 'pay2', tenant: 'Neha Kapoor', unit: 'B-102', type: 'Monthly rent', amount: 22000, date: '01 Sep 2026', status: 'Paid' },
-  { id: 'pay3', tenant: 'Rohan Shah', unit: '1st Floor', type: 'Monthly rent', amount: 18000, date: 'Due 01 Sep', status: 'Overdue' },
-  { id: 'pay4', tenant: 'Priya Nair', unit: 'Shop 02', type: 'Monthly rent', amount: 26000, date: 'Due 10 Sep', status: 'Pending' },
-  { id: 'pay5', tenant: 'Aarav Mehta', unit: 'A-204', type: 'Electricity', amount: 1860, date: '28 Aug 2026', status: 'Paid' },
-];
-const initialMaintenance: MaintenanceItem[] = [
-  { id: 'm1', title: 'Kitchen tap replacement', unit: 'A-204 · Cedar Heights', date: '02 Sep 2026', status: 'Completed', cost: 850 },
-  { id: 'm2', title: 'Paint touch-up', unit: 'C-301 · Cedar Heights', date: '31 Aug 2026', status: 'In progress', cost: 3200 },
-  { id: 'm3', title: 'AC service', unit: 'Shop 02 · The Corner Shops', date: '28 Aug 2026', status: 'Completed', cost: 1200 },
-];
 const money = (amount: number) => `₹${amount.toLocaleString('en-IN')}`;
 
 function IconButton({ children, onPress, label }: { children: React.ReactNode; onPress?: () => void; label: string }) {
@@ -85,14 +48,112 @@ function Header({ onNotifications, onMenu }: { onNotifications: () => void; onMe
   return <View style={s.header}><View><Text style={s.brand}>Havenly</Text><Text style={s.headerCaption}>PROPERTY DESK</Text></View><View style={s.headerActions}><IconButton label="Notifications" onPress={onNotifications}><Bell size={20} color={C.ink} /></IconButton><IconButton label="Open menu" onPress={onMenu}><Menu size={20} color={C.ink} /></IconButton><View style={s.avatar}><Text style={s.avatarText}>AK</Text></View></View></View>;
 }
 function Dashboard({ onTab, onAddPayment }: { onTab: (tab: Tab) => void; onAddPayment: () => void }) {
-  return <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={s.scrollContent}><View style={s.greetingRow}><View><Text style={s.eyebrow}>THURSDAY, 04 SEPTEMBER 2026</Text><Text style={s.pageTitle}>Good morning, Anika</Text><Text style={s.pageSubtitle}>Here’s your property overview.</Text></View><View style={s.sunBadge}><Text style={{ fontSize: 22 }}>☀️</Text></View></View><View style={s.heroCard}><View style={s.heroTop}><View><Text style={s.heroLabel}>COLLECTED THIS MONTH</Text><Text style={s.heroValue}>{money(204000)}</Text></View><View style={s.heroTrend}><ArrowUpRight size={15} color={C.greenDark} /><Text style={s.heroTrendText}>+8.4%</Text></View></View><View style={s.progressTrack}><View style={s.progressFill} /></View><View style={s.heroBottom}><Text style={s.heroMeta}>of {money(245000)} expected</Text><Text style={s.heroMeta}>83% collected</Text></View></View><View style={s.statsGrid}><StatCard icon={Building2} label="Properties" value="3" detail="24 total units" color={C.green} onPress={() => onTab('properties')} /><StatCard icon={Users} label="Tenants" value="4" detail="1 payment due" color={C.navy} onPress={() => onTab('tenants')} /><StatCard icon={WalletCards} label="To collect" value={money(44000)} detail="2 pending bills" color={C.amber} onPress={() => onTab('payments')} /><StatCard icon={Wrench} label="Maintenance" value="2" detail="1 in progress" color={C.red} onPress={() => onTab('maintenance')} /></View><SectionTitle title="Needs your attention" action="View payments" onAction={() => onTab('payments')} /><Attention icon={CircleAlert} title="One payment is overdue" sub={`Rohan Shah · 1st Floor · ${money(18000)}`} tone="red" /><Attention icon={Clock3} title="Rent is due in 6 days" sub={`Priya Nair · Shop 02 · ${money(26000)}`} tone="amber" /><SectionTitle title="Recurring this month" action="Manage" onAction={() => onTab('payments')} /><View style={s.recurringCard}>{recurringBills.map((bill) => { const Icon = bill.icon; return <View key={bill.label} style={s.recurringRow}><View style={[s.recurringIcon, { backgroundColor: `${bill.color}16` }]}><Icon size={17} color={bill.color} /></View><View style={s.recurringCopy}><Text style={s.recurringLabel}>{bill.label}</Text><Text style={s.recurringCount}>{bill.count}</Text></View><Text style={s.recurringAmount}>{money(bill.amount)}</Text></View>; })}</View><SectionTitle title="Quick actions" /><View style={s.quickActions}><QuickAction icon={Plus} label="Record payment" onPress={onAddPayment} /><QuickAction icon={Users} label="Add tenant" onPress={() => onTab('tenants')} /><QuickAction icon={Wrench} label="Log maintenance" onPress={() => onTab('maintenance')} /></View><View style={{ height: 20 }} /></ScrollView>;
+  return (
+    <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={s.scrollContent}>
+      <GreetingCard />
+      <HeroSummary />
+      <StatsGrid onTab={onTab} />
+      <AttentionList onTab={onTab} />
+      <RecurringBills onTab={onTab} />
+      <SectionTitle title="Quick actions" />
+      <View style={s.quickActions}>
+        <QuickAction icon={Plus} label="Record payment" onPress={onAddPayment} />
+        <QuickAction icon={Users} label="Add tenant" onPress={() => onTab('tenants')} />
+        <QuickAction icon={Wrench} label="Log maintenance" onPress={() => onTab('maintenance')} />
+      </View>
+      <View style={{ height: 20 }} />
+    </ScrollView>
+  );
 }
+
+function GreetingCard() {
+  return (
+    <View style={s.greetingRow}>
+      <View>
+        <Text style={s.eyebrow}>THURSDAY, 04 SEPTEMBER 2026</Text>
+        <Text style={s.pageTitle}>Good morning, Anika</Text>
+        <Text style={s.pageSubtitle}>Here’s your property overview.</Text>
+      </View>
+      <View style={s.sunBadge}><Text style={{ fontSize: 22 }}>☀️</Text></View>
+    </View>
+  );
+}
+
+function HeroSummary() {
+  return (
+    <View style={s.heroCard}>
+      <View style={s.heroTop}>
+        <View>
+          <Text style={s.heroLabel}>COLLECTED THIS MONTH</Text>
+          <Text style={s.heroValue}>{money(204000)}</Text>
+        </View>
+        <View style={s.heroTrend}>
+          <ArrowUpRight size={15} color={C.greenDark} />
+          <Text style={s.heroTrendText}>+8.4%</Text>
+        </View>
+      </View>
+      <View style={s.progressTrack}><View style={s.progressFill} /></View>
+      <View style={s.heroBottom}>
+        <Text style={s.heroMeta}>of {money(245000)} expected</Text>
+        <Text style={s.heroMeta}>83% collected</Text>
+      </View>
+    </View>
+  );
+}
+
+function StatsGrid({ onTab }: { onTab: (tab: Tab) => void }) {
+  return (
+    <View style={s.statsGrid}>
+      <StatCard icon={Building2} label="Properties" value="3" detail="24 total units" color={C.green} onPress={() => onTab('properties')} />
+      <StatCard icon={Users} label="Tenants" value="4" detail="1 payment due" color={C.navy} onPress={() => onTab('tenants')} />
+      <StatCard icon={WalletCards} label="To collect" value={money(44000)} detail="2 pending bills" color={C.amber} onPress={() => onTab('payments')} />
+      <StatCard icon={Wrench} label="Maintenance" value="2" detail="1 in progress" color={C.red} onPress={() => onTab('maintenance')} />
+    </View>
+  );
+}
+
+function AttentionList({ onTab }: { onTab: (tab: Tab) => void }) {
+  return (
+    <>
+      <SectionTitle title="Needs your attention" action="View payments" onAction={() => onTab('payments')} />
+      <Attention icon={CircleAlert} title="One payment is overdue" sub={`Rohan Shah · 1st Floor · ${money(18000)}`} tone="red" />
+      <Attention icon={Clock3} title="Rent is due in 6 days" sub={`Priya Nair · Shop 02 · ${money(26000)}`} tone="amber" />
+    </>
+  );
+}
+
+function RecurringBills({ onTab }: { onTab: (tab: Tab) => void }) {
+  const recurringBills = storageService.getRecurringBills();
+  return (
+    <>
+      <SectionTitle title="Recurring this month" action="Manage" onAction={() => onTab('payments')} />
+      <View style={s.recurringCard}>
+        {recurringBills.map((bill) => {
+          const Icon = bill.icon;
+          return (
+            <View key={bill.label} style={s.recurringRow}>
+              <View style={[s.recurringIcon, { backgroundColor: `${bill.color}16` }]}>
+                <Icon size={17} color={bill.color} />
+              </View>
+              <View style={s.recurringCopy}>
+                <Text style={s.recurringLabel}>{bill.label}</Text>
+                <Text style={s.recurringCount}>{bill.count}</Text>
+              </View>
+              <Text style={s.recurringAmount}>{money(bill.amount)}</Text>
+            </View>
+          );
+        })}
+      </View>
+    </>
+  );
+}
+
 function Attention({ icon: Icon, title, sub, tone }: { icon: typeof CircleAlert; title: string; sub: string; tone: 'red' | 'amber' }) { return <View style={s.attentionCard}><View style={[s.attentionIcon, { backgroundColor: tone === 'red' ? C.redSoft : C.amberSoft }]}><Icon size={19} color={tone === 'red' ? C.red : C.amber} /></View><View style={s.attentionCopy}><Text style={s.attentionTitle}>{title}</Text><Text style={s.attentionSub}>{sub}</Text></View><ChevronRight size={19} color={C.muted} /></View>; }
 function StatCard({ icon: Icon, label, value, detail, color, onPress }: { icon: typeof HomeIcon; label: string; value: string; detail: string; color: string; onPress: () => void }) { return <Pressable onPress={onPress} style={({ pressed }) => [s.statCard, pressed && s.pressed]}><View style={[s.statIcon, { backgroundColor: `${color}15` }]}><Icon size={17} color={color} /></View><Text style={s.statLabel}>{label}</Text><Text style={s.statValue}>{value}</Text><Text style={s.statDetail}>{detail}</Text></Pressable>; }
 function QuickAction({ icon: Icon, label, onPress }: { icon: typeof Plus; label: string; onPress: () => void }) { return <Pressable onPress={onPress} style={({ pressed }) => [s.quickAction, pressed && s.pressed]}><View style={s.quickIcon}><Icon size={19} color={C.green} /></View><Text style={s.quickLabel}>{label}</Text></Pressable>; }
 function ScreenIntro({ eyebrow, title, subtitle, action, onAction }: { eyebrow: string; title: string; subtitle: string; action: string; onAction: () => void }) { return <View style={s.screenIntro}><View><Text style={s.eyebrow}>{eyebrow}</Text><Text style={s.pageTitle}>{title}</Text><Text style={s.pageSubtitle}>{subtitle}</Text></View><Pressable onPress={onAction} style={({ pressed }) => [s.smallAdd, pressed && s.pressed]}><Plus size={16} color="#FFFFFF" /><Text style={s.smallAddText}>{action}</Text></Pressable></View>; }
-function PropertiesScreen({ onAdd }: { onAdd: () => void }) { return <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={s.scrollContent}><ScreenIntro eyebrow="YOUR PORTFOLIO" title="Properties" subtitle="A clear view of every place you manage." action="Add property" onAction={onAdd} /><View style={s.portfolioSummary}><View><Text style={s.summaryLabel}>PORTFOLIO VALUE THIS MONTH</Text><Text style={s.summaryValue}>{money(362000)}</Text></View><View style={s.occupancy}><Text style={s.occupancyValue}>79%</Text><Text style={s.occupancyLabel}>occupied</Text></View></View><SectionTitle title="All properties" />{properties.map((property) => <View key={property.id} style={s.propertyCard}><View style={s.propertyVisual}><Building2 size={26} color={C.green} /></View><View style={s.propertyBody}><View style={s.rowBetween}><View><Text style={s.propertyName}>{property.name}</Text><Text style={s.propertyAddress}>{property.address}</Text></View><ChevronRight size={19} color={C.muted} /></View><View style={s.propertyStats}><View><Text style={s.miniLabel}>UNITS</Text><Text style={s.miniValue}>{property.occupied} <Text style={s.miniMuted}>/ {property.units}</Text></Text></View><View><Text style={s.miniLabel}>MONTHLY INCOME</Text><Text style={s.miniValue}>{money(property.income)}</Text></View><View><Text style={s.miniLabel}>STATUS</Text><Pill label={`${property.units - property.occupied} vacant`} tone={property.units - property.occupied ? 'amber' : 'green'} /></View></View></View></View>)}<SectionTitle title="Unit availability" action="See all" /><View style={s.unitList}>{units.map((unit) => <View key={unit.id} style={s.unitRow}><View style={[s.unitDot, { backgroundColor: unit.status === 'Occupied' ? C.green : unit.status === 'Vacant' ? C.amber : C.red }]} /><View style={s.unitCopy}><Text style={s.unitName}>{unit.label} <Text style={s.unitType}>· {unit.type}</Text></Text><Text style={s.unitSub}>{unit.tenant || 'Available for allotment'} · {unit.property}</Text></View><Pill label={unit.status} tone={unit.status === 'Occupied' ? 'green' : unit.status === 'Vacant' ? 'amber' : 'red'} /></View>)}</View><View style={{ height: 20 }} /></ScrollView>; }
-function TenantsScreen({ onAdd }: { onAdd: () => void }) { const [query, setQuery] = useState(''); const [selected, setSelected] = useState<string | null>(null); const filtered = tenants.filter((tenant) => `${tenant.name} ${tenant.unit} ${tenant.property}`.toLowerCase().includes(query.toLowerCase())); return <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={s.scrollContent}><ScreenIntro eyebrow="PEOPLE & AGREEMENTS" title="Tenants" subtitle="Profiles, documents and tenure in one place." action="Add tenant" onAction={onAdd} /><View style={s.searchBox}><Search size={18} color={C.muted} /><TextInput placeholder="Search tenants or units" placeholderTextColor="#9AA69F" value={query} onChangeText={setQuery} style={s.searchInput} /></View><View style={s.tenantSummary}><SummaryMetric label="Active tenants" value="4" /><SummaryMetric label="Agreements ending" value="1" alert /></View><SectionTitle title={`${filtered.length} active tenants`} />{filtered.map((tenant) => <Pressable key={tenant.id} onPress={() => setSelected(selected === tenant.id ? null : tenant.id)} style={({ pressed }) => [s.tenantCard, pressed && s.pressed]}><View style={[s.tenantAvatar, { backgroundColor: tenant.color }]}><Text style={s.tenantAvatarText}>{tenant.initials}</Text></View><View style={s.tenantMain}><View style={s.rowBetween}><View><Text style={s.tenantName}>{tenant.name}</Text><Text style={s.tenantUnit}>{tenant.unit} · {tenant.property}</Text></View><ChevronRight size={18} color={C.muted} /></View><View style={s.tenantMeta}><Text style={s.tenantRent}>{money(tenant.rent)} <Text style={s.tenantRentLabel}>/ month</Text></Text><Pill label={`Due ${tenant.due}`} tone={tenant.due === '01 Sep' ? 'red' : 'amber'} /></View>{selected === tenant.id ? <View style={s.tenantDetails}><Detail icon={CalendarDays} text={tenant.tenure} /><Detail icon={FileText} text="Agreement · ID · Address proof" /><Detail icon={Receipt} text={tenant.phone} /></View> : null}</View></Pressable>)}{filtered.length === 0 ? <EmptyState icon={Users} title="No tenants found" caption="Try a different name, property or unit." /> : null}<View style={{ height: 20 }} /></ScrollView>; }
+function PropertiesScreen({ properties, units, onAdd }: { properties: Property[]; units: Unit[]; onAdd: () => void }) { return <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={s.scrollContent}><ScreenIntro eyebrow="YOUR PORTFOLIO" title="Properties" subtitle="A clear view of every place you manage." action="Add property" onAction={onAdd} /><View style={s.portfolioSummary}><View><Text style={s.summaryLabel}>PORTFOLIO VALUE THIS MONTH</Text><Text style={s.summaryValue}>{money(362000)}</Text></View><View style={s.occupancy}><Text style={s.occupancyValue}>79%</Text><Text style={s.occupancyLabel}>occupied</Text></View></View><SectionTitle title="All properties" />{properties.map((property) => <View key={property.id} style={s.propertyCard}><View style={s.propertyVisual}><Building2 size={26} color={C.green} /></View><View style={s.propertyBody}><View style={s.rowBetween}><View><Text style={s.propertyName}>{property.name}</Text><Text style={s.propertyAddress}>{property.address}</Text></View><ChevronRight size={19} color={C.muted} /></View><View style={s.propertyStats}><View><Text style={s.miniLabel}>UNITS</Text><Text style={s.miniValue}>{property.occupied} <Text style={s.miniMuted}>/ {property.units}</Text></Text></View><View><Text style={s.miniLabel}>MONTHLY INCOME</Text><Text style={s.miniValue}>{money(property.income)}</Text></View><View><Text style={s.miniLabel}>STATUS</Text><Pill label={`${property.units - property.occupied} vacant`} tone={property.units - property.occupied ? 'amber' : 'green'} /></View></View></View></View>)}<SectionTitle title="Unit availability" action="See all" /><View style={s.unitList}>{units.map((unit) => <View key={unit.id} style={s.unitRow}><View style={[s.unitDot, { backgroundColor: unit.status === 'Occupied' ? C.green : unit.status === 'Vacant' ? C.amber : C.red }]} /><View style={s.unitCopy}><Text style={s.unitName}>{unit.label} <Text style={s.unitType}>· {unit.type}</Text></Text><Text style={s.unitSub}>{unit.tenant || 'Available for allotment'} · {unit.property}</Text></View><Pill label={unit.status} tone={unit.status === 'Occupied' ? 'green' : unit.status === 'Vacant' ? 'amber' : 'red'} /></View>)}</View><View style={{ height: 20 }} /></ScrollView>; }
+function TenantsScreen({ tenants, onAdd }: { tenants: Tenant[]; onAdd: () => void }) { const [query, setQuery] = useState(''); const [selected, setSelected] = useState<string | null>(null); const filtered = tenants.filter((tenant) => `${tenant.name} ${tenant.unit} ${tenant.property}`.toLowerCase().includes(query.toLowerCase())); return <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={s.scrollContent}><ScreenIntro eyebrow="PEOPLE & AGREEMENTS" title="Tenants" subtitle="Profiles, documents and tenure in one place." action="Add tenant" onAction={onAdd} /><View style={s.searchBox}><Search size={18} color={C.muted} /><TextInput placeholder="Search tenants or units" placeholderTextColor="#9AA69F" value={query} onChangeText={setQuery} style={s.searchInput} /></View><View style={s.tenantSummary}><SummaryMetric label="Active tenants" value="4" /><SummaryMetric label="Agreements ending" value="1" alert /></View><SectionTitle title={`${filtered.length} active tenants`} />{filtered.map((tenant) => <Pressable key={tenant.id} onPress={() => setSelected(selected === tenant.id ? null : tenant.id)} style={({ pressed }) => [s.tenantCard, pressed && s.pressed]}><View style={[s.tenantAvatar, { backgroundColor: tenant.color }]}><Text style={s.tenantAvatarText}>{tenant.initials}</Text></View><View style={s.tenantMain}><View style={s.rowBetween}><View><Text style={s.tenantName}>{tenant.name}</Text><Text style={s.tenantUnit}>{tenant.unit} · {tenant.property}</Text></View><ChevronRight size={18} color={C.muted} /></View><View style={s.tenantMeta}><Text style={s.tenantRent}>{money(tenant.rent)} <Text style={s.tenantRentLabel}>/ month</Text></Text><Pill label={`Due ${tenant.due}`} tone={tenant.due === '01 Sep' ? 'red' : 'amber'} /></View>{selected === tenant.id ? <View style={s.tenantDetails}><Detail icon={CalendarDays} text={tenant.tenure} /><Detail icon={FileText} text="Agreement · ID · Address proof" /><Detail icon={Receipt} text={tenant.phone} /></View> : null}</View></Pressable>)}{filtered.length === 0 ? <EmptyState icon={Users} title="No tenants found" caption="Try a different name, property or unit." /> : null}<View style={{ height: 20 }} /></ScrollView>; }
 function Detail({ icon: Icon, text }: { icon: typeof CalendarDays; text: string }) { return <View style={s.detailLine}><Icon size={15} color={C.muted} /><Text style={s.detailText}>{text}</Text></View>; }
 function SummaryMetric({ label, value, alert = false }: { label: string; value: string; alert?: boolean }) { return <View style={s.summaryMetric}><Text style={s.summaryMetricValue}>{value}</Text><Text style={[s.summaryMetricLabel, alert && { color: C.amber }]}>{label}</Text></View>; }
 function PaymentsScreen({ payments, onAdd }: { payments: Payment[]; onAdd: () => void }) { const [filter, setFilter] = useState<'All' | PaymentStatus>('All'); const visible = filter === 'All' ? payments : payments.filter((payment) => payment.status === filter); const pending = payments.filter((payment) => payment.status !== 'Paid').reduce((sum, payment) => sum + payment.amount, 0); return <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={s.scrollContent}><ScreenIntro eyebrow="MONEY IN, CLEARLY" title="Payments" subtitle="Keep every rent and bill accounted for." action="Record payment" onAction={onAdd} /><View style={s.paymentHero}><View><Text style={s.summaryLabel}>OUTSTANDING</Text><Text style={s.paymentOutstanding}>{money(pending)}</Text><Text style={s.paymentHint}>Across 2 pending items</Text></View><View style={s.paymentIcon}><WalletCards size={25} color="#FFFFFF" /></View></View><View style={s.filterRow}>{(['All', 'Paid', 'Pending', 'Overdue'] as const).map((item) => <Pressable key={item} onPress={() => setFilter(item)} style={[s.filterChip, filter === item && s.filterChipActive]}><Text style={[s.filterText, filter === item && s.filterTextActive]}>{item}</Text></Pressable>)}</View><SectionTitle title="Payment ledger" action="Export" onAction={() => Alert.alert('Report ready', 'A shareable payment summary will be available when export is connected.')} />{visible.map((payment) => <PaymentRow key={payment.id} payment={payment} />)}<View style={{ height: 20 }} /></ScrollView>; }
@@ -103,13 +164,25 @@ function AddPaymentModal({ visible, onClose, onSave }: { visible: boolean; onClo
 function BottomNav({ active, onChange }: { active: Tab; onChange: (tab: Tab) => void }) { const items: { key: Tab; label: string; icon: typeof HomeIcon }[] = [{ key: 'home', label: 'Home', icon: HomeIcon }, { key: 'properties', label: 'Properties', icon: Building2 }, { key: 'tenants', label: 'Tenants', icon: Users }, { key: 'payments', label: 'Payments', icon: WalletCards }, { key: 'maintenance', label: 'More', icon: Menu }]; return <View style={s.bottomNav}>{items.map(({ key, label, icon: Icon }) => <Pressable key={key} onPress={() => onChange(key)} style={s.navItem}><Icon size={21} color={active === key ? C.green : C.muted} strokeWidth={active === key ? 2.5 : 1.8} /><Text style={[s.navLabel, active === key && s.navLabelActive]}>{label}</Text>{active === key ? <View style={s.navDot} /> : null}</Pressable>)}</View>; }
 
 export default function Home() {
-  const [role, setRole] = useState<'owner' | 'tenant' | null>(null); const [activeTab, setActiveTab] = useState<Tab>('home'); const [payments, setPayments] = useState(initialPayments); const [maintenance, setMaintenance] = useState(initialMaintenance); const [paymentModal, setPaymentModal] = useState(false);
+  const [role, setRole] = useState<'owner' | 'tenant' | null>(null); const [activeTab, setActiveTab] = useState<Tab>('home'); const [payments, setPayments] = useState<Payment[]>([]); const [maintenance, setMaintenance] = useState<MaintenanceItem[]>([]); const [properties, setProperties] = useState<Property[]>([]); const [tenants, setTenants] = useState<Tenant[]>([]); const [units, setUnits] = useState<Unit[]>([]); const [paymentModal, setPaymentModal] = useState(false);
+  useEffect(() => {
+    let cancelled = false;
+    storageService.initialize().then(async () => {
+      const [p, t, u, pay, maint] = await Promise.all([
+        storageService.getProperties(), storageService.getTenants(), storageService.getUnits(),
+        storageService.getPayments(), storageService.getMaintenance(),
+      ]);
+      if (cancelled) return;
+      setProperties(p); setTenants(t); setUnits(u); setPayments(pay); setMaintenance(maint);
+    }).catch((error) => console.error('Failed to load workspace data:', error));
+    return () => { cancelled = true; };
+  }, []);
   if (!role) return <LoginScreen onLogin={setRole} />;
   const title = { home: 'Overview', properties: 'Properties', tenants: 'Tenants', payments: 'Payments', maintenance: 'Maintenance' }[activeTab];
   const addProperty = () => Alert.alert('Add property', 'Property creation is ready for the next step. Demo properties are already loaded.');
   const addTenant = () => Alert.alert('Add tenant', 'Tenant creation is ready for the next step. Select a tenant card to view profile details.');
-  const addMaintenance = () => { const item: MaintenanceItem = { id: `m-${Date.now()}`, title: 'New maintenance item', unit: 'C-301 · Cedar Heights', date: '04 Sep 2026', status: 'Open', cost: 0 }; setMaintenance((current) => [item, ...current]); Alert.alert('Maintenance logged', 'The new item has been added to your activity list.'); };
-  return <SafeAreaView style={s.appRoot} edges={['top', 'left', 'right']}><Header onNotifications={() => Alert.alert('Notifications', '2 reminders: one overdue rent and one upcoming due date.')} onMenu={() => setActiveTab('maintenance')} /><View style={s.contentHeader}><Text style={s.contentHeaderTitle}>{title}</Text><Text style={s.contentHeaderDate}>September 2026</Text></View><View style={s.screenBody}>{activeTab === 'home' ? <Dashboard onTab={setActiveTab} onAddPayment={() => setPaymentModal(true)} /> : activeTab === 'properties' ? <PropertiesScreen onAdd={addProperty} /> : activeTab === 'tenants' ? <TenantsScreen onAdd={addTenant} /> : activeTab === 'payments' ? <PaymentsScreen payments={payments} onAdd={() => setPaymentModal(true)} /> : activeTab === 'maintenance' ? <MaintenanceScreen items={maintenance} onAdd={addMaintenance} /> : null}</View><BottomNav active={activeTab} onChange={setActiveTab} /><AddPaymentModal visible={paymentModal} onClose={() => setPaymentModal(false)} onSave={(payment) => setPayments((current) => [payment, ...current])} /></SafeAreaView>;
+  const addMaintenance = () => { const item: MaintenanceItem = { id: `m-${Date.now()}`, title: 'New maintenance item', unit: 'C-301 · Cedar Heights', date: '04 Sep 2026', status: 'Open', cost: 0 }; setMaintenance((current) => [item, ...current]); storageService.addMaintenance(item).catch((error) => console.error('Failed to save maintenance item:', error)); Alert.alert('Maintenance logged', 'The new item has been added to your activity list.'); };
+  return <SafeAreaView style={s.appRoot} edges={['top', 'left', 'right']}><Header onNotifications={() => Alert.alert('Notifications', '2 reminders: one overdue rent and one upcoming due date.')} onMenu={() => setActiveTab('maintenance')} /><View style={s.contentHeader}><Text style={s.contentHeaderTitle}>{title}</Text><Text style={s.contentHeaderDate}>September 2026</Text></View><View style={s.screenBody}>{activeTab === 'home' ? <Dashboard onTab={setActiveTab} onAddPayment={() => setPaymentModal(true)} /> : activeTab === 'properties' ? <PropertiesScreen properties={properties} units={units} onAdd={addProperty} /> : activeTab === 'tenants' ? <TenantsScreen tenants={tenants} onAdd={addTenant} /> : activeTab === 'payments' ? <PaymentsScreen payments={payments} onAdd={() => setPaymentModal(true)} /> : activeTab === 'maintenance' ? <MaintenanceScreen items={maintenance} onAdd={addMaintenance} /> : null}</View><BottomNav active={activeTab} onChange={setActiveTab} /><AddPaymentModal visible={paymentModal} onClose={() => setPaymentModal(false)} onSave={(payment) => { setPayments((current) => [payment, ...current]); storageService.addPayment(payment).catch((error) => console.error('Failed to save payment:', error)); }} /></SafeAreaView>;
 }
 
 const s = StyleSheet.create({

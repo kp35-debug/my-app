@@ -1,0 +1,2 @@
+npm notice run starter-kit-expo@1.0.0 npx
+npm notice run tsc --noEmit --pretty false
