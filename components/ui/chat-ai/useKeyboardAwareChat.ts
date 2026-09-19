@@ -42,18 +42,18 @@ export const useKeyboardAwareChat = () => {
         },
       ],
     };
-  },[keyboardHeight.value, keyboardProgress.value]);
+  });
 
 
   const listContentStyle = useAnimatedStyle(() => {
     return {
       paddingBottom: keyboardOffset.value,
     };
-  },[keyboardOffset.value]);
+  });
 
 
   const panGesture = useMemo(() => {
-    return Gesture.Pan(); 
+    return Gesture.Pan();
   }, []);
 
   return {

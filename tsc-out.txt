@@ -1,0 +1,318 @@
+app/_layout.tsx(46,27): error TS2367: This comparison appears to be unintentional because the types '"light"' and '"dark"' have no overlap.
+components/Themed.tsx(24,26): error TS7053: Element implicitly has an 'any' type because expression of type 'ColorSchemeName' can't be used to index type '{ light?: string | undefined; dark?: string | undefined; }'.
+  Property 'unspecified' does not exist on type '{ light?: string | undefined; dark?: string | undefined; }'.
+components/Themed.tsx(29,12): error TS7053: Element implicitly has an 'any' type because expression of type 'ColorSchemeName' can't be used to index type '{ light: { text: string; background: string; tint: string; icon: string; tabIconDefault: string; tabIconSelected: string; }; dark: { text: string; background: string; tint: string; icon: string; tabIconDefault: string; tabIconSelected: string; }; }'.
+  Property 'unspecified' does not exist on type '{ light: { text: string; background: string; tint: string; icon: string; tabIconDefault: string; tabIconSelected: string; }; dark: { text: string; background: string; tint: string; icon: string; tabIconDefault: string; tabIconSelected: string; }; }'.
+components/ui/accordion/USAGE_EXAMPLE.tsx(75,11): error TS7031: Binding element 'isExpanded' implicitly has an 'any' type.
+components/ui/accordion/USAGE_EXAMPLE.tsx(80,32): error TS2304: Cannot find name 'ChevronUpIcon'.
+components/ui/accordion/USAGE_EXAMPLE.tsx(108,11): error TS7031: Binding element 'isExpanded' implicitly has an 'any' type.
+components/ui/alert-dialog/index.tsx(140,9): error TS2353: Object literal may only specify known properties, and 'opacity' does not exist in type 'Partial<TransformsConfig<[Scale]>>'.
+components/ui/avatar/index.tsx(104,7): error TS2578: Unused '@ts-expect-error' directive.
+components/ui/badge/index.tsx(102,5): error TS2322: Type '{ height: true; width: true; fill: true; color: string; stroke: true; }' is not assignable to type 'undefined'.
+components/ui/bottomsheet/index.tsx(174,36): error TS2322: Type '{ bottomSheetRef: React.RefObject<BottomSheetMethods | null>; handleClose: () => void; handleOpen: (index?: number) => void; isVisible: boolean; handleSheetChanges: (index: number) => void; currentIndex: number; }' is not assignable to type 'BottomSheetContextValue'.
+  Types of property 'bottomSheetRef' are incompatible.
+    Type 'RefObject<BottomSheetMethods | null>' is not assignable to type 'RefObject<BottomSheetMethods>'.
+      Type 'BottomSheetMethods | null' is not assignable to type 'BottomSheetMethods'.
+        Type 'null' is not assignable to type 'BottomSheetMethods'.
+components/ui/bottomsheet/index.tsx(221,46): error TS2339: Property 'length' does not exist on type '(string | number)[] | SharedValue<(string | number)[]>'.
+  Property 'length' does not exist on type 'SharedValue<(string | number)[]>'.
+components/ui/bottomsheet/index.tsx(222,51): error TS2339: Property 'length' does not exist on type '(string | number)[] | SharedValue<(string | number)[]>'.
+  Property 'length' does not exist on type 'SharedValue<(string | number)[]>'.
+components/ui/bottomsheet/index.tsx(234,11): error TS2554: Expected 3 arguments, but got 1.
+components/ui/bottomsheet/index.tsx(277,3): error TS2339: Property 'disappearsOnIndex' does not exist on type 'Partial<IBottomSheetBackdropProps>'.
+components/ui/bottomsheet/index.tsx(278,3): error TS2339: Property 'appearsOnIndex' does not exist on type 'Partial<IBottomSheetBackdropProps>'.
+components/ui/bottomsheet/index.tsx(279,3): error TS2339: Property 'opacity' does not exist on type 'Partial<IBottomSheetBackdropProps>'.
+components/ui/bottomsheet/index.tsx(281,3): error TS2339: Property 'pressBehavior' does not exist on type 'Partial<IBottomSheetBackdropProps>'.
+components/ui/bottomsheet/index.tsx(315,6): error TS2322: Type '{ children: ReactNode | ReactNode[]; className: string; style?: StyleProp<ViewStyle>; indicatorStyle?: StyleProp<ViewStyle>; ... 38 more ...; accessibilityRespondsToUserInteraction?: boolean | undefined; }' is not assignable to type 'BottomSheetDefaultHandleProps'.
+  Types of property 'animatedIndex' are incompatible.
+    Type 'SharedValue<number> | undefined' is not assignable to type 'SharedValue<number>'.
+      Type 'undefined' is not assignable to type 'SharedValue<number>'.
+components/ui/bottomsheet/index.tsx(407,28): error TS2590: Expression produces a union type that is too complex to represent.
+components/ui/bottomsheet/index.tsx(422,6): error TS2322: Type '{ children: ReactNode | ((state: PressableStateCallbackType) => ReactNode); className: string; onPress: (e: GestureResponderEvent | PressableEvent) => void; ... 105 more ...; onPointerUpCapture?: ((event: PointerEvent) => void) | undefined; }' is not assignable to type 'PressableProps'.
+  Types of property 'onHoverIn' are incompatible.
+    Type '((event: MouseEvent) => void) | null | undefined' is not assignable to type '((event: PressableEvent) => void) | null | undefined'.
+      Type '(event: MouseEvent) => void' is not assignable to type '(event: PressableEvent) => void'.
+        Types of parameters 'event' and 'event' are incompatible.
+          Type 'PressableEvent' is missing the following properties from type 'NativeSyntheticEvent<NativeMouseEvent>': currentTarget, target, bubbles, cancelable, and 10 more.
+components/ui/bottomsheet/index.tsx(427,25): error TS2345: Argument of type 'GestureResponderEvent | PressableEvent' is not assignable to parameter of type 'GestureResponderEvent'.
+  Type 'PressableEvent' is missing the following properties from type 'NativeSyntheticEvent<NativeTouchEvent>': currentTarget, target, bubbles, cancelable, and 10 more.
+components/ui/chat-ai/attatchments.tsx(107,10): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(props: ScrollViewProps): ScrollView', gave the following error.
+    Type '{ children: ReactNode; hitSlop?: number | Insets | null | undefined; id?: string | undefined; needsOffscreenAlphaCompositing?: boolean | undefined; onLayout?: ((event: LayoutChangeEvent) => void) | undefined; ... 91 more ...; className: string; }' is not assignable to type 'IntrinsicClassAttributes<ScrollView>'.
+      Types of property 'ref' are incompatible.
+        Type 'Ref<View> | undefined' is not assignable to type 'Ref<ScrollView> | undefined'.
+          Type '(instance: View | null) => void | (() => VoidOrUndefinedOnly)' is not assignable to type 'Ref<ScrollView> | undefined'.
+            Type '(instance: View | null) => void | (() => VoidOrUndefinedOnly)' is not assignable to type '(instance: ScrollView | null) => void | (() => VoidOrUndefinedOnly)'.
+              Types of parameters 'instance' and 'instance' are incompatible.
+                Type 'ScrollView | null' is not assignable to type 'View | null'.
+                  Type 'ScrollView' is not assignable to type 'ReactNativeElement & ViewComponent'.
+                    Type 'ScrollView' is missing the following properties from type 'ReactNativeElement': blur, focus, offsetHeight, offsetLeft, and 43 more.
+  Overload 2 of 2, '(props: ScrollViewProps, context: any): ScrollView', gave the following error.
+    Type '{ children: ReactNode; hitSlop?: number | Insets | null | undefined; id?: string | undefined; needsOffscreenAlphaCompositing?: boolean | undefined; onLayout?: ((event: LayoutChangeEvent) => void) | undefined; ... 91 more ...; className: string; }' is not assignable to type 'IntrinsicClassAttributes<ScrollView>'.
+      Types of property 'ref' are incompatible.
+        Type 'Ref<View> | undefined' is not assignable to type 'Ref<ScrollView> | undefined'.
+          Type '(instance: View | null) => void | (() => VoidOrUndefinedOnly)' is not assignable to type 'Ref<ScrollView> | undefined'.
+            Type '(instance: View | null) => void | (() => VoidOrUndefinedOnly)' is not assignable to type '(instance: ScrollView | null) => void | (() => VoidOrUndefinedOnly)'.
+              Types of parameters 'instance' and 'instance' are incompatible.
+                Type 'ScrollView | null' is not assignable to type 'View | null'.
+                  Type 'ScrollView' is not assignable to type 'ReactNativeElement & ViewComponent'.
+                    Type 'ScrollView' is missing the following properties from type 'ReactNativeElement': blur, focus, offsetHeight, offsetLeft, and 43 more.
+components/ui/chat-ai/attatchments.tsx(308,13): error TS2698: Spread types may only be created from object types.
+components/ui/chat-ai/conversation.tsx(27,55): error TS2304: Cannot find name 'ConversationProps'.
+components/ui/chat-ai/conversation.tsx(115,11): error TS2322: Type 'RefObject<FlatList<UIMessage<unknown, UIDataTypes, UITools>> | LegendListRef$1 | null>' is not assignable to type 'Ref<LegendListRef> | undefined'.
+  Type 'RefObject<FlatList<UIMessage<unknown, UIDataTypes, UITools>> | LegendListRef$1 | null>' is not assignable to type 'RefObject<LegendListRef | null>'.
+    Type 'FlatList<UIMessage<unknown, UIDataTypes, UITools>> | LegendListRef$1 | null' is not assignable to type 'LegendListRef | null'.
+      Type 'FlatList<UIMessage<unknown, UIDataTypes, UITools>>' is not assignable to type 'LegendListRef'.
+        Type 'FlatList<UIMessage<unknown, UIDataTypes, UITools>>' is missing the following properties from type 'Omit<LegendListRef$1, "getScrollResponder" | "getNativeScrollRef" | "reportContentInset">': getState, scrollIndexIntoView, scrollItemIntoView, setVisibleContentAnchorOffset, and 2 more.
+components/ui/chat-ai/conversation.tsx(119,11): error TS2322: Type 'ListRenderItem<UIMessage<unknown, UIDataTypes, UITools>>' is not assignable to type '(props: LegendListRenderItemProps<UIMessage<unknown, UIDataTypes, UITools>, string | undefined>) => ReactNode'.
+  Types of parameters 'info' and 'props' are incompatible.
+    Property 'separators' is missing in type 'LegendListRenderItemProps<UIMessage<unknown, UIDataTypes, UITools>, string | undefined>' but required in type 'ListRenderItemInfo<UIMessage<unknown, UIDataTypes, UITools>>'.
+components/ui/chat-ai/message.tsx(140,12): error TS7006: Parameter 'node' implicitly has an 'any' type.
+components/ui/chat-ai/message.tsx(140,18): error TS7006: Parameter 'children' implicitly has an 'any' type.
+components/ui/chat-ai/message.tsx(140,28): error TS7006: Parameter 'parent' implicitly has an 'any' type.
+components/ui/chat-ai/message.tsx(148,20): error TS7006: Parameter 'node' implicitly has an 'any' type.
+components/ui/chat-ai/message.tsx(148,26): error TS7006: Parameter 'children' implicitly has an 'any' type.
+components/ui/chat-ai/message.tsx(156,17): error TS7006: Parameter 'node' implicitly has an 'any' type.
+components/ui/chat-ai/message.tsx(156,23): error TS7006: Parameter 'children' implicitly has an 'any' type.
+components/ui/chat-ai/message.tsx(156,33): error TS7006: Parameter 'parent' implicitly has an 'any' type.
+components/ui/chat-ai/message.tsx(171,17): error TS7006: Parameter 'node' implicitly has an 'any' type.
+components/ui/chat-ai/message.tsx(171,23): error TS7006: Parameter 'children' implicitly has an 'any' type.
+components/ui/chat-ai/message.tsx(179,14): error TS7006: Parameter 'node' implicitly has an 'any' type.
+components/ui/chat-ai/message.tsx(179,20): error TS7006: Parameter 'children' implicitly has an 'any' type.
+components/ui/chat-ai/message.tsx(185,10): error TS7006: Parameter 'node' implicitly has an 'any' type.
+components/ui/chat-ai/message.tsx(185,16): error TS7006: Parameter 'children' implicitly has an 'any' type.
+components/ui/chat-ai/message.tsx(191,13): error TS7006: Parameter 'node' implicitly has an 'any' type.
+components/ui/chat-ai/message.tsx(197,18): error TS7006: Parameter 'node' implicitly has an 'any' type.
+components/ui/chat-ai/message.tsx(203,19): error TS7006: Parameter 'node' implicitly has an 'any' type.
+components/ui/chat-ai/message.tsx(214,54): error TS2339: Property 'content' does not exist on type 'UIMessage<unknown, UIDataTypes, UITools>'.
+components/ui/chat-ai/message.tsx(239,25): error TS2339: Property 'data' does not exist on type 'FileUIPart'.
+components/ui/chat-ai/message.tsx(239,38): error TS2339: Property 'mimeType' does not exist on type 'FileUIPart'.
+components/ui/chat-ai/message.tsx(240,32): error TS2339: Property 'mimeType' does not exist on type 'FileUIPart'.
+components/ui/chat-ai/message.tsx(240,56): error TS2339: Property 'data' does not exist on type 'FileUIPart'.
+components/ui/chat-ai/message.tsx(395,9): error TS2304: Cannot find name 'branches'.
+components/ui/chat-ai/message.tsx(398,22): error TS2304: Cannot find name 'branches'.
+components/ui/chat-ai/model-selector.tsx(93,5): error TS2554: Expected 1 arguments, but got 0.
+components/ui/chat-ai/model-selector.tsx(100,21): error TS18046: 'children.props' is of type 'unknown'.
+components/ui/chat-ai/model-selector.tsx(138,18): error TS2322: Type 'ReactNode | SharedValue<ReactNode>' is not assignable to type 'ReactNode'.
+  Type 'SharedValue<ReactNode>' is not assignable to type 'ReactNode'.
+components/ui/chat-ai/prompt-input.tsx(105,45): error TS2339: Property 'name' does not exist on type 'ImagePickerAsset'.
+components/ui/checkbox/index.tsx(33,35): error TS2322: Type 'ForwardedRef<Svg | { fill?: ColorValue | undefined; stroke?: ColorValue | undefined; }>' is not assignable to type 'Ref<(IPrimitiveIcon & RefAttributes<Svg>) | { fill?: ColorValue | undefined; stroke?: ColorValue | undefined; }> | ((((instance: Svg | null) => void | (() => VoidOrUndefinedOnly)) | RefObject<...>) & (((instance: (IPrimitiveIcon & RefAttributes<...>) | ... 1 more ... | null) => void | (() => VoidOrUndefinedOnly)) | ...'.
+  Type 'RefObject<Svg | { fill?: ColorValue | undefined; stroke?: ColorValue | undefined; } | null>' is not assignable to type 'Ref<(IPrimitiveIcon & RefAttributes<Svg>) | { fill?: ColorValue | undefined; stroke?: ColorValue | undefined; }> | ((((instance: Svg | null) => void | (() => VoidOrUndefinedOnly)) | RefObject<...>) & (((instance: (IPrimitiveIcon & RefAttributes<...>) | ... 1 more ... | null) => void | (() => VoidOrUndefinedOnly)) | ...'.
+    Type 'RefObject<Svg | { fill?: ColorValue | undefined; stroke?: ColorValue | undefined; } | null>' is not assignable to type 'RefObject<(IPrimitiveIcon & RefAttributes<Svg>) | { fill?: ColorValue | undefined; stroke?: ColorValue | undefined; } | null>'.
+      Type 'Svg | { fill?: ColorValue | undefined; stroke?: ColorValue | undefined; } | null' is not assignable to type '(IPrimitiveIcon & RefAttributes<Svg>) | { fill?: ColorValue | undefined; stroke?: ColorValue | undefined; } | null'.
+        Type 'Svg' is not assignable to type '(IPrimitiveIcon & RefAttributes<Svg>) | { fill?: ColorValue | undefined; stroke?: ColorValue | undefined; } | null'.
+          Type 'Svg' has no properties in common with type 'IPrimitiveIcon & RefAttributes<Svg>'.
+components/ui/checkbox/index.tsx(130,38): error TS2339: Property 'size' does not exist on type 'ICheckboxIconProps'.
+components/ui/checkbox/index.tsx(141,12): error TS2339: Property 'height' does not exist on type '{ children?: ReactNode; fill?: string | undefined; style?: any; id?: string | undefined; role?: Role | undefined; height?: string | number | undefined; onLayout?: ((event: LayoutChangeEvent) => void) | undefined; ... 92 more ...; forceMount?: boolean | undefined; } | { ...; }'.
+  Property 'height' does not exist on type '{ children?: ReactNode; fill?: ColorValue | undefined; style?: StyleProp<ViewStyle>; id?: string | undefined; role?: Role | undefined; ... 89 more ...; forceMount?: boolean | undefined; }'.
+components/ui/checkbox/index.tsx(141,42): error TS2339: Property 'width' does not exist on type '{ children?: ReactNode; fill?: string | undefined; style?: any; id?: string | undefined; role?: Role | undefined; height?: string | number | undefined; onLayout?: ((event: LayoutChangeEvent) => void) | undefined; ... 92 more ...; forceMount?: boolean | undefined; } | { ...; }'.
+  Property 'width' does not exist on type '{ children?: ReactNode; fill?: ColorValue | undefined; style?: StyleProp<ViewStyle>; id?: string | undefined; role?: Role | undefined; ... 89 more ...; forceMount?: boolean | undefined; }'.
+components/ui/date-time-picker/index.tsx(60,33): error TS2322: Type '{ textAlign: true; }' is not assignable to type 'undefined'.
+components/ui/date-time-picker/index.tsx(536,9): error TS2322: Type 'ForwardedRef<Svg | { fill?: ColorValue | undefined; stroke?: ColorValue | undefined; }>' is not assignable to type 'Ref<(IPrimitiveIcon & RefAttributes<Svg>) | { fill?: ColorValue | undefined; stroke?: ColorValue | undefined; }> | ((((instance: Svg | null) => void | (() => VoidOrUndefinedOnly)) | RefObject<...>) & (((instance: (IPrimitiveIcon & RefAttributes<...>) | ... 1 more ... | null) => void | (() => VoidOrUndefinedOnly)) | ...'.
+  Type 'RefObject<Svg | { fill?: ColorValue | undefined; stroke?: ColorValue | undefined; } | null>' is not assignable to type 'Ref<(IPrimitiveIcon & RefAttributes<Svg>) | { fill?: ColorValue | undefined; stroke?: ColorValue | undefined; }> | ((((instance: Svg | null) => void | (() => VoidOrUndefinedOnly)) | RefObject<...>) & (((instance: (IPrimitiveIcon & RefAttributes<...>) | ... 1 more ... | null) => void | (() => VoidOrUndefinedOnly)) | ...'.
+    Type 'RefObject<Svg | { fill?: ColorValue | undefined; stroke?: ColorValue | undefined; } | null>' is not assignable to type 'RefObject<(IPrimitiveIcon & RefAttributes<Svg>) | { fill?: ColorValue | undefined; stroke?: ColorValue | undefined; } | null>'.
+      Type 'Svg | { fill?: ColorValue | undefined; stroke?: ColorValue | undefined; } | null' is not assignable to type '(IPrimitiveIcon & RefAttributes<Svg>) | { fill?: ColorValue | undefined; stroke?: ColorValue | undefined; } | null'.
+        Type 'Svg' is not assignable to type '(IPrimitiveIcon & RefAttributes<Svg>) | { fill?: ColorValue | undefined; stroke?: ColorValue | undefined; } | null'.
+          Type 'Svg' has no properties in common with type 'IPrimitiveIcon & RefAttributes<Svg>'.
+components/ui/date-time-picker/index.tsx(553,7): error TS2322: Type 'ForwardedRef<Svg | { fill?: ColorValue | undefined; stroke?: ColorValue | undefined; }>' is not assignable to type 'Ref<(IPrimitiveIcon & RefAttributes<Svg>) | { fill?: ColorValue | undefined; stroke?: ColorValue | undefined; }> | ((((instance: Svg | null) => void | (() => VoidOrUndefinedOnly)) | RefObject<...>) & (((instance: (IPrimitiveIcon & RefAttributes<...>) | ... 1 more ... | null) => void | (() => VoidOrUndefinedOnly)) | ...'.
+  Type 'RefObject<Svg | { fill?: ColorValue | undefined; stroke?: ColorValue | undefined; } | null>' is not assignable to type 'Ref<(IPrimitiveIcon & RefAttributes<Svg>) | { fill?: ColorValue | undefined; stroke?: ColorValue | undefined; }> | ((((instance: Svg | null) => void | (() => VoidOrUndefinedOnly)) | RefObject<...>) & (((instance: (IPrimitiveIcon & RefAttributes<...>) | ... 1 more ... | null) => void | (() => VoidOrUndefinedOnly)) | ...'.
+    Type 'RefObject<Svg | { fill?: ColorValue | undefined; stroke?: ColorValue | undefined; } | null>' is not assignable to type 'RefObject<(IPrimitiveIcon & RefAttributes<Svg>) | { fill?: ColorValue | undefined; stroke?: ColorValue | undefined; } | null>'.
+      Type 'Svg | { fill?: ColorValue | undefined; stroke?: ColorValue | undefined; } | null' is not assignable to type '(IPrimitiveIcon & RefAttributes<Svg>) | { fill?: ColorValue | undefined; stroke?: ColorValue | undefined; } | null'.
+        Type 'Svg' is not assignable to type '(IPrimitiveIcon & RefAttributes<Svg>) | { fill?: ColorValue | undefined; stroke?: ColorValue | undefined; } | null'.
+          Type 'Svg' has no properties in common with type 'IPrimitiveIcon & RefAttributes<Svg>'.
+components/ui/date-time-picker/index.web.tsx(122,17): error TS2322: Type '{ mode: "single"; selected: Date | undefined; onSelect: (date: Date | Date[] | { from: Date; to: Date; }) => void; initialDate: Date | undefined; minDate: Date | undefined; maxDate: Date | undefined; }' is not assignable to type 'IntrinsicAttributes & (CalendarProps & RefAttributes<View>)'.
+  Property 'selected' does not exist on type 'IntrinsicAttributes & SingleModeProps & Omit<ICalendarProps, OmittedCalendarKeys> & Omit<...> & { ...; } & RefAttributes<...>'.
+components/ui/gluestack-ui-provider/index.next.tsx(4,24): error TS2307: Cannot find module './config' or its corresponding type declarations.
+components/ui/gluestack-ui-provider/index.uniwind.tsx(5,25): error TS2307: Cannot find module 'uniwind' or its corresponding type declarations.
+components/ui/menu/index.tsx(106,28): error TS2589: Type instantiation is excessively deep and possibly infinite.
+components/ui/menu/index.tsx(106,28): error TS2590: Expression produces a union type that is too complex to represent.
+components/ui/menu/index.tsx(129,11): error TS2353: Object literal may only specify known properties, and 'opacity' does not exist in type 'Partial<TransformsConfig<[Scale]>>'.
+components/ui/modal/index.tsx(19,33): error TS2590: Expression produces a union type that is too complex to represent.
+components/ui/modal/index.tsx(139,9): error TS2353: Object literal may only specify known properties, and 'opacity' does not exist in type 'Partial<TransformsConfig<[Scale]>>'.
+components/ui/spinner/index.tsx(9,33): error TS2322: Type '{ color: true; }' is not assignable to type 'undefined'.
+components/ui/table/index.tsx(120,9): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(props: ViewProps): View', gave the following error.
+    Type 'ForwardedRef<View | Text>' is not assignable to type 'Ref<View> | undefined'.
+      Type 'RefObject<View | Text | null>' is not assignable to type 'Ref<View> | undefined'.
+        Type 'RefObject<View | Text | null>' is not assignable to type 'RefObject<View | null>'.
+          Type 'View | Text | null' is not assignable to type 'View | null'.
+            Type 'Text' is not assignable to type 'View | null'.
+              Type 'ReactNativeElement & TextComponent' is not assignable to type 'View'.
+                Type 'ReactNativeElement & TextComponent' is not assignable to type 'ViewComponent'.
+                  The types of 'props.style' are incompatible between these types.
+                    Type 'StyleProp<TextStyle>' is not assignable to type 'StyleProp<ViewStyle>'.
+                      Type 'TextStyle' is not assignable to type 'StyleProp<ViewStyle>'.
+                        Type 'TextStyle' is not assignable to type 'ViewStyle'.
+                          Types of property 'cursor' are incompatible.
+                            Type 'string | undefined' is not assignable to type 'CursorValue | undefined'.
+                              Type 'string' is not assignable to type 'CursorValue | undefined'.
+  Overload 2 of 2, '(props: ViewProps, context: any): View', gave the following error.
+    Type 'ForwardedRef<View | Text>' is not assignable to type 'Ref<View> | undefined'.
+      Type 'RefObject<View | Text | null>' is not assignable to type 'Ref<View> | undefined'.
+        Type 'RefObject<View | Text | null>' is not assignable to type 'RefObject<View | null>'.
+          Type 'View | Text | null' is not assignable to type 'View | null'.
+            Type 'Text' is not assignable to type 'View | null'.
+              Type 'ReactNativeElement & TextComponent' is not assignable to type 'View'.
+                Type 'ReactNativeElement & TextComponent' is not assignable to type 'ViewComponent'.
+                  The types of 'props.style' are incompatible between these types.
+                    Type 'StyleProp<TextStyle>' is not assignable to type 'StyleProp<ViewStyle>'.
+                      Type 'TextStyle' is not assignable to type 'StyleProp<ViewStyle>'.
+                        Type 'TextStyle' is not assignable to type 'ViewStyle'.
+                          Types of property 'cursor' are incompatible.
+                            Type 'string | undefined' is not assignable to type 'CursorValue | undefined'.
+                              Type 'string' is not assignable to type 'CursorValue | undefined'.
+components/ui/table/index.tsx(128,9): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(props: TextProps): Text', gave the following error.
+    Type 'ForwardedRef<View | Text>' is not assignable to type 'Ref<Text> | undefined'.
+      Type 'RefObject<View | Text | null>' is not assignable to type 'Ref<Text> | undefined'.
+        Type 'RefObject<View | Text | null>' is not assignable to type 'RefObject<Text | null>'.
+          Type 'View | Text | null' is not assignable to type 'Text | null'.
+            Type 'View' is not assignable to type 'Text | null'.
+              Type 'ReactNativeElement & ViewComponent' is not assignable to type 'Text'.
+                Type 'ReactNativeElement & ViewComponent' is not assignable to type 'TextComponent'.
+                  The types of 'props.style' are incompatible between these types.
+                    Type 'StyleProp<ViewStyle>' is not assignable to type 'StyleProp<TextStyle>'.
+                      Type 'ViewStyle' is not assignable to type 'StyleProp<TextStyle>'.
+                        Type 'ViewStyle' is not assignable to type 'TextStyle'.
+                          Types of property 'userSelect' are incompatible.
+                            Type 'string | undefined' is not assignable to type '"text" | "none" | "auto" | "contain" | "all" | undefined'.
+                              Type 'string' is not assignable to type '"text" | "none" | "auto" | "contain" | "all" | undefined'.
+  Overload 2 of 2, '(props: TextProps, context: any): Text', gave the following error.
+    Type 'ForwardedRef<View | Text>' is not assignable to type 'Ref<Text> | undefined'.
+      Type 'RefObject<View | Text | null>' is not assignable to type 'Ref<Text> | undefined'.
+        Type 'RefObject<View | Text | null>' is not assignable to type 'RefObject<Text | null>'.
+          Type 'View | Text | null' is not assignable to type 'Text | null'.
+            Type 'View' is not assignable to type 'Text | null'.
+              Type 'ReactNativeElement & ViewComponent' is not assignable to type 'Text'.
+                Type 'ReactNativeElement & ViewComponent' is not assignable to type 'TextComponent'.
+                  The types of 'props.style' are incompatible between these types.
+                    Type 'StyleProp<ViewStyle>' is not assignable to type 'StyleProp<TextStyle>'.
+                      Type 'ViewStyle' is not assignable to type 'StyleProp<TextStyle>'.
+                        Type 'ViewStyle' is not assignable to type 'TextStyle'.
+                          Types of property 'userSelect' are incompatible.
+                            Type 'string | undefined' is not assignable to type '"text" | "none" | "auto" | "contain" | "all" | undefined'.
+                              Type 'string' is not assignable to type '"text" | "none" | "auto" | "contain" | "all" | undefined'.
+components/ui/table/index.tsx(163,9): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(props: ViewProps): View', gave the following error.
+    Type 'ForwardedRef<View | Text>' is not assignable to type 'Ref<View> | undefined'.
+      Type 'RefObject<View | Text | null>' is not assignable to type 'Ref<View> | undefined'.
+        Type 'RefObject<View | Text | null>' is not assignable to type 'RefObject<View | null>'.
+          Type 'View | Text | null' is not assignable to type 'View | null'.
+            Type 'Text' is not assignable to type 'View | null'.
+              Type 'ReactNativeElement & TextComponent' is not assignable to type 'View'.
+                Type 'ReactNativeElement & TextComponent' is not assignable to type 'ViewComponent'.
+                  The types of 'props.style' are incompatible between these types.
+                    Type 'StyleProp<TextStyle>' is not assignable to type 'StyleProp<ViewStyle>'.
+                      Type 'TextStyle' is not assignable to type 'StyleProp<ViewStyle>'.
+                        Type 'TextStyle' is not assignable to type 'ViewStyle'.
+                          Types of property 'cursor' are incompatible.
+                            Type 'string | undefined' is not assignable to type 'CursorValue | undefined'.
+                              Type 'string' is not assignable to type 'CursorValue | undefined'.
+  Overload 2 of 2, '(props: ViewProps, context: any): View', gave the following error.
+    Type 'ForwardedRef<View | Text>' is not assignable to type 'Ref<View> | undefined'.
+      Type 'RefObject<View | Text | null>' is not assignable to type 'Ref<View> | undefined'.
+        Type 'RefObject<View | Text | null>' is not assignable to type 'RefObject<View | null>'.
+          Type 'View | Text | null' is not assignable to type 'View | null'.
+            Type 'Text' is not assignable to type 'View | null'.
+              Type 'ReactNativeElement & TextComponent' is not assignable to type 'View'.
+                Type 'ReactNativeElement & TextComponent' is not assignable to type 'ViewComponent'.
+                  The types of 'props.style' are incompatible between these types.
+                    Type 'StyleProp<TextStyle>' is not assignable to type 'StyleProp<ViewStyle>'.
+                      Type 'TextStyle' is not assignable to type 'StyleProp<ViewStyle>'.
+                        Type 'TextStyle' is not assignable to type 'ViewStyle'.
+                          Types of property 'cursor' are incompatible.
+                            Type 'string | undefined' is not assignable to type 'CursorValue | undefined'.
+                              Type 'string' is not assignable to type 'CursorValue | undefined'.
+components/ui/table/index.tsx(171,9): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(props: TextProps): Text', gave the following error.
+    Type 'ForwardedRef<View | Text>' is not assignable to type 'Ref<Text> | undefined'.
+      Type 'RefObject<View | Text | null>' is not assignable to type 'Ref<Text> | undefined'.
+        Type 'RefObject<View | Text | null>' is not assignable to type 'RefObject<Text | null>'.
+          Type 'View | Text | null' is not assignable to type 'Text | null'.
+            Type 'View' is not assignable to type 'Text | null'.
+              Type 'ReactNativeElement & ViewComponent' is not assignable to type 'Text'.
+                Type 'ReactNativeElement & ViewComponent' is not assignable to type 'TextComponent'.
+                  The types of 'props.style' are incompatible between these types.
+                    Type 'StyleProp<ViewStyle>' is not assignable to type 'StyleProp<TextStyle>'.
+                      Type 'ViewStyle' is not assignable to type 'StyleProp<TextStyle>'.
+                        Type 'ViewStyle' is not assignable to type 'TextStyle'.
+                          Types of property 'userSelect' are incompatible.
+                            Type 'string | undefined' is not assignable to type '"text" | "none" | "auto" | "contain" | "all" | undefined'.
+                              Type 'string' is not assignable to type '"text" | "none" | "auto" | "contain" | "all" | undefined'.
+  Overload 2 of 2, '(props: TextProps, context: any): Text', gave the following error.
+    Type 'ForwardedRef<View | Text>' is not assignable to type 'Ref<Text> | undefined'.
+      Type 'RefObject<View | Text | null>' is not assignable to type 'Ref<Text> | undefined'.
+        Type 'RefObject<View | Text | null>' is not assignable to type 'RefObject<Text | null>'.
+          Type 'View | Text | null' is not assignable to type 'Text | null'.
+            Type 'View' is not assignable to type 'Text | null'.
+              Type 'ReactNativeElement & ViewComponent' is not assignable to type 'Text'.
+                Type 'ReactNativeElement & ViewComponent' is not assignable to type 'TextComponent'.
+                  The types of 'props.style' are incompatible between these types.
+                    Type 'StyleProp<ViewStyle>' is not assignable to type 'StyleProp<TextStyle>'.
+                      Type 'ViewStyle' is not assignable to type 'StyleProp<TextStyle>'.
+                        Type 'ViewStyle' is not assignable to type 'TextStyle'.
+                          Types of property 'userSelect' are incompatible.
+                            Type 'string | undefined' is not assignable to type '"text" | "none" | "auto" | "contain" | "all" | undefined'.
+                              Type 'string' is not assignable to type '"text" | "none" | "auto" | "contain" | "all" | undefined'.
+src/storage/__tests__/storageService.test.ts(12,10): error TS2305: Module '"react"' has no exported member 'Platform'.
+src/storage/__tests__/storageService.test.ts(15,1): error TS2708: Cannot use namespace 'jest' as a value.
+src/storage/__tests__/storageService.test.ts(16,17): error TS2708: Cannot use namespace 'jest' as a value.
+src/storage/__tests__/storageService.test.ts(17,17): error TS2708: Cannot use namespace 'jest' as a value.
+src/storage/__tests__/storageService.test.ts(18,20): error TS2708: Cannot use namespace 'jest' as a value.
+src/storage/__tests__/storageService.test.ts(21,1): error TS2708: Cannot use namespace 'jest' as a value.
+src/storage/__tests__/storageService.test.ts(22,18): error TS2708: Cannot use namespace 'jest' as a value.
+src/storage/__tests__/storageService.test.ts(29,14): error TS2708: Cannot use namespace 'jest' as a value.
+src/storage/__tests__/storageService.test.ts(30,14): error TS2708: Cannot use namespace 'jest' as a value.
+src/storage/__tests__/storageService.test.ts(33,17): error TS2708: Cannot use namespace 'jest' as a value.
+src/storage/__tests__/storageService.test.ts(38,7): error TS2708: Cannot use namespace 'jest' as a value.
+src/storage/__tests__/storageService.test.ts(48,27): error TS2708: Cannot use namespace 'jest' as a value.
+src/storage/__tests__/storageService.test.ts(86,1): error TS2593: Cannot find name 'beforeEach'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/storage/__tests__/storageService.test.ts(94,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/storage/__tests__/storageService.test.ts(95,3): error TS2593: Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/storage/__tests__/storageService.test.ts(97,5): error TS2304: Cannot find name 'expect'.
+src/storage/__tests__/storageService.test.ts(99,7): error TS2304: Cannot find name 'expect'.
+src/storage/__tests__/storageService.test.ts(101,5): error TS2304: Cannot find name 'expect'.
+src/storage/__tests__/storageService.test.ts(103,7): error TS2304: Cannot find name 'expect'.
+src/storage/__tests__/storageService.test.ts(105,5): error TS2304: Cannot find name 'expect'.
+src/storage/__tests__/storageService.test.ts(107,7): error TS2304: Cannot find name 'expect'.
+src/storage/__tests__/storageService.test.ts(111,3): error TS2593: Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/storage/__tests__/storageService.test.ts(115,5): error TS2304: Cannot find name 'expect'.
+src/storage/__tests__/storageService.test.ts(119,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/storage/__tests__/storageService.test.ts(120,3): error TS2593: Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/storage/__tests__/storageService.test.ts(123,5): error TS2304: Cannot find name 'expect'.
+src/storage/__tests__/storageService.test.ts(123,30): error TS2304: Cannot find name 'expect'.
+src/storage/__tests__/storageService.test.ts(126,3): error TS2593: Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/storage/__tests__/storageService.test.ts(130,5): error TS2304: Cannot find name 'expect'.
+src/storage/__tests__/storageService.test.ts(135,3): error TS2593: Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/storage/__tests__/storageService.test.ts(139,5): error TS2304: Cannot find name 'expect'.
+src/storage/__tests__/storageService.test.ts(143,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/storage/__tests__/storageService.test.ts(144,3): error TS2593: Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/storage/__tests__/storageService.test.ts(146,5): error TS2304: Cannot find name 'expect'.
+src/storage/__tests__/storageService.test.ts(151,5): error TS2304: Cannot find name 'expect'.
+src/storage/__tests__/storageService.test.ts(156,5): error TS2304: Cannot find name 'expect'.
+src/storage/__tests__/storageService.test.ts(162,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/storage/__tests__/storageService.test.ts(163,3): error TS2593: Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/storage/__tests__/storageService.test.ts(175,5): error TS2304: Cannot find name 'expect'.
+src/storage/__tests__/storageService.test.ts(179,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/storage/__tests__/storageService.test.ts(180,3): error TS2593: Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/storage/__tests__/storageService.test.ts(188,5): error TS2304: Cannot find name 'expect'.
+src/storage/__tests__/storageService.test.ts(189,5): error TS2304: Cannot find name 'expect'.
+src/storage/__tests__/storageService.test.ts(193,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/storage/__tests__/storageService.test.ts(194,3): error TS2593: Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/storage/__tests__/storageService.test.ts(197,5): error TS2304: Cannot find name 'expect'.
+src/storage/__tests__/storageService.test.ts(201,5): error TS2304: Cannot find name 'expect'.
+src/storage/__tests__/storageService.test.ts(204,3): error TS2593: Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/storage/__tests__/storageService.test.ts(207,5): error TS2304: Cannot find name 'expect'.
+src/storage/__tests__/storageService.test.ts(211,5): error TS2304: Cannot find name 'expect'.
+src/storage/__tests__/storageService.test.ts(215,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/storage/__tests__/storageService.test.ts(216,3): error TS2593: Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/storage/__tests__/storageService.test.ts(220,7): error TS2304: Cannot find name 'expect'.
+src/storage/__tests__/storageService.test.ts(222,5): error TS2304: Cannot find name 'expect'.
+src/storage/__tests__/storageService.test.ts(225,3): error TS2593: Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/storage/__tests__/storageService.test.ts(229,7): error TS2304: Cannot find name 'expect'.
+src/storage/__tests__/storageService.test.ts(234,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/storage/__tests__/storageService.test.ts(235,3): error TS2593: Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/storage/__tests__/storageService.test.ts(236,5): error TS2304: Cannot find name 'expect'.
+src/storage/__tests__/storageService.test.ts(239,3): error TS2593: Cannot find name 'test'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+src/storage/__tests__/storageService.test.ts(240,5): error TS2304: Cannot find name 'expect'.
+src/storage/storageService.ts(2,10): error TS2305: Module '"react"' has no exported member 'Platform'.

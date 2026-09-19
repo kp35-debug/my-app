@@ -25,7 +25,13 @@
       "@react-native-community/datetimepicker",
       ["expo-notifications", { "color": "#1F7A53", "defaultChannel": "payments" }],
       "expo-splash-screen",
-      "expo-status-bar"
+      "expo-status-bar",
+      "expo-secure-store",
+      "expo-notifications",
+        {
+          "color": "#1F7A53",
+          "defaultChannel": "payments"
+        }
     ],
     "experiments": {
       "typedRoutes": true
